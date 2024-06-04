@@ -1,5 +1,6 @@
 const express = require('express');
 const TextPost = require('../models/textPost');
+const Location = require('../models/location');
 const router = express.Router();
 
 // Create a new text post
@@ -34,6 +35,17 @@ router.get('/user/:userName', async (req, res) => {
         });
     } catch (err) {
         res.status(500).send('Error retrieving text posts');
+    }
+});
+
+router.post('/location', async (req, res) => {
+    const { latitude , longitude , userName } = req.body;
+    try {
+        const newLoaction = new Location({ latitude, longitude, userName });
+        await newLoaction.save();
+        res.status(201).send('Success');
+    } catch (err) {
+        res.status(500).send('Error posting Love');
     }
 });
 
