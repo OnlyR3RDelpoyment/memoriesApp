@@ -43,9 +43,9 @@ router.post('/location', async (req, res) => {
     try {
         const newLoaction = new Location({ latitude, longitude, userName });
         await newLoaction.save();
-        res.status(201).send('Success');
+        res.status(201).json({msg:'Success'});  
     } catch (err) {
-        res.status(500).send('Error posting Love');
+        res.status(500).json({msg:'Error posting Love'});
     }
 });
 
